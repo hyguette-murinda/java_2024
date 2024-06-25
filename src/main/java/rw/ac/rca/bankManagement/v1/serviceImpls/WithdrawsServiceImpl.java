@@ -4,21 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import rw.ac.rca.bankManagement.v1.dto.requests.CreateWithdrawsDTO;
+import rw.ac.rca.bankManagement.v1.enums.Type;
 import rw.ac.rca.bankManagement.v1.models.Customer;
 import rw.ac.rca.bankManagement.v1.models.Withdraws;
 import rw.ac.rca.bankManagement.v1.repositories.CustomerRepository;
 import rw.ac.rca.bankManagement.v1.repositories.WithDrawsRepository;
+import rw.ac.rca.bankManagement.v1.services.MailService;
 import rw.ac.rca.bankManagement.v1.services.WithdrawsService;
 
 @Service
 public class WithdrawsServiceImpl implements WithdrawsService {
     private final WithDrawsRepository withDrawsRepository;
     private final CustomerRepository customerRepository;
+    private final MailService mailService;
 
     @Autowired
-    public WithdrawsServiceImpl(WithDrawsRepository savingsRepository, CustomerRepository customerRepository) {
+    public WithdrawsServiceImpl(WithDrawsRepository savingsRepository, CustomerRepository customerRepository,MailService mailService) {
         this.withDrawsRepository = savingsRepository;
         this.customerRepository = customerRepository;
+        this.mailService = mailService;
     }
 
     @Override
@@ -48,6 +52,7 @@ public class WithdrawsServiceImpl implements WithdrawsService {
             Double amountToAdd = Double.parseDouble(String.valueOf(createWithdrawsDTO.getAmount()));
             customer.setBalance(currentBalance - amountToAdd);
             customerRepository.save(customer);
+            mailService.sendMail(customer, Type.WITHDRAW,customer.getBalance());
         } catch (NumberFormatException e) {
             throw new Exception("Invalid balance format");
         }
