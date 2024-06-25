@@ -17,7 +17,6 @@ import java.util.UUID;
 @Accessors(chain = true)
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "savings")
 public class Savings {
