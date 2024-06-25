@@ -1,14 +1,17 @@
 package rw.ac.rca.bankManagement.v1.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.UpdateTimestamp;
 import rw.ac.rca.bankManagement.v1.enums.Type;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,6 +20,7 @@ import java.util.UUID;
 @Accessors(chain = true)
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "savings")
 public class Savings {
@@ -35,8 +39,9 @@ public class Savings {
 
     @Column(name ="type")
     private Type type;
-
-    private Date bankingDateTime;
+    @UpdateTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime bankingDateTime;
 
 //    public Savings() {
 //        // Default constructor
