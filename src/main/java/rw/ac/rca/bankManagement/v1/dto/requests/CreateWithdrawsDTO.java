@@ -26,6 +26,7 @@ public class CreateWithdrawsDTO {
     private UUID customer_id;
 
     @NotNull
+    @Size(min=2)
     private Double amount; // Change to Double
 
     @NotNull
@@ -33,7 +34,7 @@ public class CreateWithdrawsDTO {
     private Type type;
 
     @NotNull
-    @Size(min = 16)
+    @Size(min = 3)
     private String account;
 
 }

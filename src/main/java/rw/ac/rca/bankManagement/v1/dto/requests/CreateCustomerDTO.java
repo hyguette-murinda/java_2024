@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -18,8 +20,10 @@ import java.util.Date;
 @AllArgsConstructor
 @Component
 public class CreateCustomerDTO {
+    @Size(min=3)
     @NotNull
     private String firstName;
+    @Size(min=3)
     @NotNull
     private String lastName;
 
@@ -28,11 +32,12 @@ public class CreateCustomerDTO {
     @NotNull
     @Size(min = 3)
     private String mobile;
+    @Past(message = "Date of birth should be in the past")
     @NotNull
-    @Size(min = 1)
-    private Date dob;
+    @Size(min = 2)
+    private LocalDate dob;
     @NotNull
-    @Size(min = 16)
+    @Size(min = 3)
     private String account;
     @NotNull
     @Size(min = 1)

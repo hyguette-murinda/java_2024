@@ -25,6 +25,7 @@ public class CreateSavingsDTO {
     @NotNull
     private UUID customer_id;
 
+    @Size(min=2)
     @NotNull
     private Double amount; // Change to Double
 
@@ -33,7 +34,7 @@ public class CreateSavingsDTO {
     private Type type;
 
     @NotNull
-    @Size(min = 16)
+    @Size(min = 3)
     private String account;
 
 }

@@ -10,6 +10,8 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
@@ -34,8 +36,10 @@ public class Customer {
     private String email;
     @NotNull
     private String mobile;
-    @NotNull
-    private Date dob;
+    @Past(message = "Date of birth should be in the past")
+    @NotNull()
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dob;
     @NotNull
     private String account;
     @NotNull
@@ -46,7 +50,7 @@ public class Customer {
 
 
 
-    public Customer(String firstName, String lastName, String email, String mobile, Date dob, String account, Double balance) {
+    public Customer(String firstName, String lastName, String email, String mobile, LocalDate dob, String account, Double balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
