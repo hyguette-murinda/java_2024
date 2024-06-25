@@ -48,5 +48,7 @@ public class CreateTransfersDTO {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
+
 }
 

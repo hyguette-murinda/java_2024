@@ -1,0 +1,49 @@
+//package rw.ac.rca.bankManagement.v1.serviceImpls;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//import org.springframework.transaction.annotation.Transactional;
+//import rw.ac.rca.bankManagement.v1.dto.requests.CreateTransfersDTO;
+//import rw.ac.rca.bankManagement.v1.models.Customer;
+//import rw.ac.rca.bankManagement.v1.repositories.CustomerRepository;
+//import rw.ac.rca.bankManagement.v1.services.TransferService;
+//
+//import java.util.Optional;
+//
+//@Service
+//public class TransferServiceImpl implements TransferService {
+//
+//    private final CustomerRepository customerRepository;
+//
+//    @Autowired
+//    public TransferServiceImpl(CustomerRepository customerRepository) {
+//        this.customerRepository = customerRepository;
+//    }
+//
+//    @Override
+//    @Transactional(rollbackFor = Exception.class)
+//    public void transferAmount(CreateTransfersDTO transferDTO) throws Exception {
+//        // Fetch sender and receiver customers
+//        Optional<Customer> sender = customerRepository.findByCustomerIdAndAccount(transferDTO.getSenderId(), transferDTO.getAccount());
+//        Optional<Customer> receiver = customerRepository.findByCustomerIdAndAccount(transferDTO.getRecipientId(), transferDTO.getAccount());
+//
+//        if (sender == null || receiver == null) {
+//            throw new Exception("Sender or receiver account not found");
+//        }
+//
+//        Double amount = transferDTO.getAmount();
+//
+//        // Check if sender has sufficient balance
+//        if (sender.getBalance() < amount) {
+//            throw new Exception("Insufficient balance");
+//        }
+//
+//        // Perform transfer
+//        sender.setBalance(sender.getBalance() - amount);
+//        receiver.setBalance(receiver.getBalance() + amount);
+//
+//        // Save updated balances
+//        customerRepository.save(sender);
+//        customerRepository.save(receiver);
+//    }
+//}
