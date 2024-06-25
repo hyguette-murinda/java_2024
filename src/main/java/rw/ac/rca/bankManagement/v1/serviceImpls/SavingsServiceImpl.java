@@ -47,9 +47,9 @@ public class SavingsServiceImpl implements SavingsService {
         }
 
         try {
-            Double currentBalance = Double.parseDouble(customer.getBalance());
+            Double currentBalance = customer.getBalance();
             Double amountToAdd = Double.parseDouble(String.valueOf(createSavingsDTO.getAmount()));
-            customer.setBalance(String.valueOf(currentBalance + amountToAdd));
+            customer.setBalance(currentBalance + amountToAdd);
             customerRepository.save(customer);
         } catch (NumberFormatException e) {
             throw new Exception("Invalid balance format");

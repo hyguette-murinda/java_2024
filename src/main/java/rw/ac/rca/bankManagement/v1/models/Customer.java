@@ -36,12 +36,12 @@ public class Customer {
     @NotNull
     private String account;
     @NotNull
-    private String balance;
+    private Double balance;
     private Date lastUpdateDateTime;
 
 
 
-    public Customer(String firstName, String lastName, String email, String mobile, Date dob, String account, String balance) {
+    public Customer(String firstName, String lastName, String email, String mobile, Date dob, String account, Double balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

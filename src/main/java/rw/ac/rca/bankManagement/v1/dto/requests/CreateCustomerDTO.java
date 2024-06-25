@@ -35,6 +35,6 @@ public class CreateCustomerDTO {
     @Size(min = 16)
     private String account;
     @NotNull
-    @Size(min = 3)
-    private String balance;
+    @Size(min = 1)
+    private Double balance;
 }

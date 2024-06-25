@@ -44,9 +44,9 @@ public class WithdrawsServiceImpl implements WithdrawsService {
         }
 
         try {
-            Double currentBalance = Double.parseDouble(customer.getBalance());
+            Double currentBalance = customer.getBalance();
             Double amountToAdd = Double.parseDouble(String.valueOf(createWithdrawsDTO.getAmount()));
-            customer.setBalance(String.valueOf(currentBalance - amountToAdd));
+            customer.setBalance(currentBalance - amountToAdd);
             customerRepository.save(customer);
         } catch (NumberFormatException e) {
             throw new Exception("Invalid balance format");
