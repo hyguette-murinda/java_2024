@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "savings")
+@Table(name = "withdraws")
 public class Withdraws {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

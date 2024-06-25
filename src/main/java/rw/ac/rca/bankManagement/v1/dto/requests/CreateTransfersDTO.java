@@ -12,6 +12,8 @@ public class CreateTransfersDTO {
 
     @NotNull
     private String senderAccount;
+    @NotNull
+    private String receiverAccount;
 
     public void setSenderAccount(String senderAccount) {
         this.senderAccount = senderAccount;
@@ -29,8 +31,7 @@ public class CreateTransfersDTO {
         return receiverAccount;
     }
 
-    @NotNull
-    private String receiverAccount;
+
 
     @NotNull
     private Double amount;

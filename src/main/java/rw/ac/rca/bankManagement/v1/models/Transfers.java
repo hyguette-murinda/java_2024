@@ -1,6 +1,5 @@
 package rw.ac.rca.bankManagement.v1.models;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,7 @@ import lombok.experimental.Accessors;
 import rw.ac.rca.bankManagement.v1.enums.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
@@ -24,18 +24,23 @@ public class Transfers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID transfer_id;
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @javax.validation.constraints.NotNull
+    private UUID senderId;
+
+    @javax.validation.constraints.NotNull
+    private UUID recipientId;
+
+    @javax.validation.constraints.NotNull
+    private String senderAccount;
     @NotNull
-    private String account;
-    @NotNull
-    private String amount;
-    @Column(name ="type")
-    private Type type;
-    private Date bankingDateTime;
+    private String receiverAccount;
 
 
+    public Transfers(UUID recipientId, UUID senderId, String senderAccount, String receiverAccount) {
+        this.recipientId = recipientId;
+        this.senderId = senderId;
+        this.senderAccount = senderAccount;
+        this.receiverAccount = receiverAccount;
 
-
+    }
 }

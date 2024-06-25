@@ -7,7 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import rw.ac.rca.bankManagement.v1.dto.requests.CreateTransfersDTO;
 import rw.ac.rca.bankManagement.v1.enums.Type;
 import rw.ac.rca.bankManagement.v1.models.Customer;
+import rw.ac.rca.bankManagement.v1.models.Savings;
+import rw.ac.rca.bankManagement.v1.models.Transfers;
 import rw.ac.rca.bankManagement.v1.repositories.CustomerRepository;
+import rw.ac.rca.bankManagement.v1.repositories.TransfersRepository;
 import rw.ac.rca.bankManagement.v1.services.MailService;
 import rw.ac.rca.bankManagement.v1.services.TransferService;
 
@@ -18,12 +21,14 @@ import java.util.Optional;
 public class TransferServiceImpl implements TransferService {
 
     private final CustomerRepository customerRepository;
+    private final TransfersRepository transfersRepository;
     private final MailService mailService;
 
     @Autowired
-    public TransferServiceImpl(CustomerRepository customerRepository,MailService mailService) {
+    public TransferServiceImpl(TransfersRepository transfersRepository,CustomerRepository customerRepository,MailService mailService) {
         this.customerRepository = customerRepository;
         this.mailService = mailService;
+        this.transfersRepository = transfersRepository;
     }
 
     @Override
@@ -47,6 +52,14 @@ public class TransferServiceImpl implements TransferService {
         // Perform transfer
         sender.setBalance(sender.getBalance() - amount);
         receiver.setBalance(receiver.getBalance() + amount);
+        Transfers transfers = new Transfers(
+                transferDTO.getRecipientId(),
+                transferDTO.getSenderId(),
+                transferDTO.getSenderAccount(),
+                transferDTO.getReceiverAccount()
+        );
+        transfersRepository.save(transfers);
+
 
         // Save updated balances
         customerRepository.save(sender);
