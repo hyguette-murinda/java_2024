@@ -11,7 +11,26 @@ public class CreateTransfersDTO {
     private UUID recipientId;
 
     @NotNull
-    private String account;
+    private String senderAccount;
+
+    public void setSenderAccount(String senderAccount) {
+        this.senderAccount = senderAccount;
+    }
+
+    public void setReceiverAccount(String receiverAccount) {
+        this.receiverAccount = receiverAccount;
+    }
+
+    public String getSenderAccount() {
+        return senderAccount;
+    }
+
+    public String getReceiverAccount() {
+        return receiverAccount;
+    }
+
+    @NotNull
+    private String receiverAccount;
 
     @NotNull
     private Double amount;
@@ -33,13 +52,6 @@ public class CreateTransfersDTO {
         this.recipientId = recipientId;
     }
 
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
 
     public Double getAmount() {
         return amount;

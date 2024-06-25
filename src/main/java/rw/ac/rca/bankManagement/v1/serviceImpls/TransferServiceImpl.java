@@ -24,8 +24,8 @@ public class TransferServiceImpl implements TransferService {
     @Transactional(rollbackFor = Exception.class)
     public void transferAmount(CreateTransfersDTO transferDTO) throws Exception {
         // Fetch sender and receiver customers
-        Customer sender = customerRepository.findByCustomerIdAndAccount(transferDTO.getSenderId(), transferDTO.getAccount());
-        Customer receiver = customerRepository.findByCustomerIdAndAccount(transferDTO.getRecipientId(), transferDTO.getAccount());
+        Customer sender = customerRepository.findByCustomerIdAndAccount(transferDTO.getSenderId(), transferDTO.getSenderAccount());
+        Customer receiver = customerRepository.findByCustomerIdAndAccount(transferDTO.getRecipientId(), transferDTO.getReceiverAccount());
 
         if (sender == null || receiver == null) {
             throw new Exception("Sender or receiver account not found");
