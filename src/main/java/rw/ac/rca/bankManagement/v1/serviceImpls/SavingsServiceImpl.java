@@ -55,7 +55,7 @@
                 Double amountToAdd = Double.parseDouble(String.valueOf(createSavingsDTO.getAmount()));
                 customer.setBalance(currentBalance + amountToAdd);
                 customerRepository.save(customer);
-                mailService.sendMail(customer, Type.SAVING,customer.getBalance());
+                mailService.sendMail(customer, Type.SAVING,createSavingsDTO.getAmount());
             } catch (NumberFormatException e) {
                 throw new Exception("Invalid balance format");
             }
