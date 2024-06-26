@@ -27,3 +27,13 @@ CREATE TRIGGER after_transaction_insert_trigger
     AFTER INSERT ON savings
     FOR EACH ROW
 EXECUTE FUNCTION after_transaction_insert();
+
+CREATE TRIGGER after_transaction_insert_trigger
+    AFTER INSERT ON withdraws
+    FOR EACH ROW
+EXECUTE FUNCTION after_transaction_insert();
+
+CREATE TRIGGER after_transaction_insert_trigger
+    AFTER INSERT ON transfers
+    FOR EACH ROW
+EXECUTE FUNCTION after_transaction_insert();

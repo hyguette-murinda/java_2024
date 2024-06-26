@@ -49,6 +49,9 @@ public class WithdrawsServiceImpl implements WithdrawsService {
 
         try {
             Double currentBalance = customer.getBalance();
+            if (currentBalance < createWithdrawsDTO.getAmount()) {
+                throw new Exception("Insufficient balance");
+            }
             Double amountToAdd = Double.parseDouble(String.valueOf(createWithdrawsDTO.getAmount()));
             customer.setBalance(currentBalance - amountToAdd);
             customerRepository.save(customer);

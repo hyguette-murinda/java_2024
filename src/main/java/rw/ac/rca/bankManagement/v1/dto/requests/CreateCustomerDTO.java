@@ -27,10 +27,10 @@ public class CreateCustomerDTO {
     @NotNull
     private String lastName;
 
-    @Email
+    @Email()
     private String email;
     @NotNull
-    @Size(min = 3)
+    @Size(min = 10)
     private String mobile;
     @Past(message = "Date of birth should be in the past")
     @NotNull

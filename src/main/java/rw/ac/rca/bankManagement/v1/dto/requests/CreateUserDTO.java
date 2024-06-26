@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 @Component
 public class CreateUserDTO {
 
-    @Email
+    @Email()
     private String email;
     @NotNull
     @Size(min = 3)
